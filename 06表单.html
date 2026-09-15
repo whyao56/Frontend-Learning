@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>表单练习：给我留言</title>
+</head>
+<body>
+    <h1>给我留言</h1>
+
+    <form>
+        <p>
+            <label for="nickname">昵称：</label>
+            <input type="text" id="nickname" name="nickname" placeholder="怎么称呼你？" required>
+        </p>
+
+        <p>
+            <label for="email">邮箱：</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com">
+        </p>
+
+        <p>
+            <label for="message">留言：</label>
+            <textarea id="message" name="message" rows="4" placeholder="想说什么就写什么..."></textarea>
+        </p>
+
+        <p>
+            今天的心情：
+            <label>
+                <input type="radio" name="mood" value="good" checked> 不错
+            </label>
+            <label>
+                <input type="radio" name="mood" value="ok"> 一般
+            </label>
+            <label>
+                <input type="radio" name="mood" value="bad"> 不太好
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input type="checkbox" name="subscribe" value="yes"> 订阅更新通知
+            </label>
+        </p>
+
+        <button type="submit">提交留言</button>
+    </form>
+</body>
+</html>
