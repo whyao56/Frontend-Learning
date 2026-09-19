@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>选择器与优先级</title>
+        <style>
+            /* 元素选择器：对所有 p 广播 */
+            p {
+                color: black;
+            }
+
+            /* 类选择器：对 class="note" 的元素喊话。点号只在 CSS 侧加 */
+            .note {
+                color: blue;
+            }
+
+            /* id 选择器：指名道姓 */
+            #special {
+                color: green;
+            }
+
+            /* 后代选择器：nav 里面的所有 a */
+            nav a {
+                color: crimson;
+                text-decoration: none;
+            }
+
+            /* 分组选择器：一条规则，多个点名单 */
+            h1, h2 {
+                letter-spacing: 3px;
+                font-family: "微软雅黑", sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>选择器与优先级</h1>
+        <h2>擂台：四种点名，谁赢？</h2>
+
+        <p class="note" id="special" style="color: purple;">
+            这段同时被 元素、类、id、行内 四种规则圈中。
+        </p>
+
+        <p class="note">
+            这段只有类选择器额外罩着。
+        </p>
+        <p>
+            这段只有元素选择器罩着。
+        </p>
+
+        <nav>
+            <a href="#">导航里的链接 A</a><br>
+            <a href="#">导航里的链接 B</a>
+        </nav>
+
+        <p>正文里的 <a href="#">链接</a> —— 不在 nav 里，不该被波及。</p>
+    </body>
+</html>

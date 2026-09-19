@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>背景、边框与圆角</title>
+    <style>
+        body {
+            font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333333;
+        }
+
+        /* 标题的“下划线式”边框 */
+        .title {
+            border-bottom: 3px solid orangered;
+        }
+
+        /* 带边框、圆角的卡片 */
+        .card {
+            border: 2px solid #1e5a96;
+            /* border: 2px dashed #1e5a96; */
+            /* border: 2px dotted #1e5a96; */
+            border-radius: 10px;
+            background-color: #f8fafc;
+        }
+
+        /* 方形图片 + 50%圆角 = 正圆头像 */
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #1e5a96;
+        }
+
+        /* 背景图的标准组合 */
+        .banner {
+            height: 160px;
+            background-image: url("flower.png");
+            background-repeat: no-repeat;
+            /* repeat 搭配 contain 一起用可以看出cover和contain的区别 */
+            /* background-repeat: repeat; */  
+            background-position: center;
+            /* background-position: left top; */
+            /* background-position: 20px 40px; */
+            background-size: cover;
+            /* background-size: contain; */
+        }
+    </style>
+</head>
+<body>
+    <h1>背景、边框与圆角</h1>
+
+    <h2 class="title">这条标题下面有一条橙色的底线</h2>
+
+    <div class="card">
+        <p>带边框和圆角的盒子。文字贴得有点紧？——那是“盒子内间距”的事，下一阶段第一课解决。</p>
+    </div>
+
+    <p>
+        <img class="avatar" src="flower.png" alt="花朵头像">
+    </p>
+
+    <div class="banner"></div>
+    <p>↑ 背景图：center（居中） + cover（铺满） + no-repeat（不重复）</p>
+    <p>会自动调整大小以适应容器。所以可能图片会被裁剪，且画质会有所损失。</p>
+    <p>把 cover 改为 contain，会保持图片的完整性和画质。但图片可能不会铺满整个容器。</p>
+</body>
+</html>

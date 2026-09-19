@@ -1,0 +1,29 @@
+/* CSS 的注释长这样。规则骨架：选择器 { 属性: 值; } */
+h1 {
+    color: darkred;  /* 文字颜色：先用颜色单词 */
+    font-size: 36px;  /* 字号：36 像素 */
+}
+
+p {
+    color: red;
+    color: #444444;  /* 十六进制颜色：# 后 6 位 */
+    line-height: 1.8;  /* 行高：字号的 1.8 倍，行距变松 */
+}
+
+a {
+    color: rgb(0, 128, 0);  /* RGB 颜色：红绿蓝三色的数值。链接不再是默认的蓝 */
+    text-decoration: none;  /* 去掉下划线 */
+}
+
+body {
+    color: #333333;  /* 文字颜色：深灰色 */
+    background-color: #fafafa; 
+    font-family: "微软雅黑", "黑体", "宋体", sans-serif;  /* 字体：先用中文字体，后备英文字体 */
+    height: 100vh;  /* 高度：视口高度的 100% */
+}
+
+.card {
+    border: 3px dashed blueviolet;  /* 边框：3 像素虚线，颜色为绿色 */
+    border-radius: 8px;  /* 圆角：半径为 8 像素 */
+    background-color: #f0f0f0;  /* 背景色：浅灰色 */
+}

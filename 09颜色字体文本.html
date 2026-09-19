@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>颜色、字体与文本</title>
+        <style>
+            /* 全站统一风格的起点：给 body 设一次，多数文字自动继承 */
+            body {
+                /* 深灰：比纯黑柔和，正文常用 */
+                color: red;
+                /* color: #333333;   */
+                font-family: "微软雅黑", "Microsoft YaHei", "PingFang SC", sans-serif;
+                line-height: 1.6;
+            }
+
+            h1 {
+                /* 蓝色标题 */
+                color: rgb(30, 90, 150);
+                font-size: 32px;
+                /* 居中对齐 */
+                text-align: center;
+            }
+
+            .tip {
+                /* 浅灰色提示文字 */
+                color: #999999;
+                font-size: 14px;
+            }
+
+            .highlight {
+                /* 橙红色高亮 */
+                color: orangered;
+                /* 加粗 */
+                font-weight: bold;
+            }
+
+            .ghost {
+                /* 半透明文字 */
+                color: rgba(30, 90, 150, 0.35);
+            }
+
+            .sale {
+                /* 灰色促销文字 */
+                color: #999999;
+                /* 删除线 */
+                text-decoration: line-through;
+            }
+
+            .indent {
+                /* 首行缩进两个字 */
+                text-indent: 2em;
+            }
+
+            pre {
+                /* monospace：等宽字体 */
+                font-family: Consolas, "Courier New", monospace;
+                background-color: #f5f5f5;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>颜色、字体与文本</h1>
+
+        <p>这段继承了 body 的深灰和行高——样式表里没给 p 单独写过 color。</p>
+
+        <p>句子里有个 <span class="highlight">重点词</span>，橙色加粗，其余是继承来的深灰。</p>
+
+        <p class="ghost">同一罐蓝油漆，兑了一点透明：rgba(30, 90, 150, 0.35)。</p>
+
+        <p>原价 <span class="sale">¥99</span>，现价 <span class="highlight">¥59</span>。</p>
+
+        <p class="tip">小字提示：14px 灰色小字。<a href="#">随便点一个链接看看</a></p>
+
+        <pre>
+            这是 pre 块：
+            空格     和换行被原样保留，
+            字体也换成了等宽字体（monospace）。
+        </pre>
+    </body>
+</html>

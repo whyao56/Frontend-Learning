@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 第一课：接管样式</title>
+
+    <!-- 方式二：内部样式表——写在本页 head 里的 style 块中 -->
+    <!-- <style>
+        /* CSS 的注释长这样。规则骨架：选择器 { 属性: 值; } */
+        h1 {
+            color: darkred;  /* 文字颜色：先用颜色单词 */
+            font-size: 36px;  /* 字号：36 像素 */
+        }
+
+        p {
+            color: #444444;  /* 十六进制颜色：# 后 6 位 */
+            line-height: 1.8;  /* 行高：字号的 1.8 倍，行距变松 */
+        }
+
+        a {
+            color: rgb(0, 128, 0);  /* RGB 颜色：红绿蓝三色的数值。链接不再是默认的蓝 */
+            text-decoration: none;  /* 去掉下划线 */
+        }
+    </style> -->
+
+    <link rel="stylesheet" href="css\style.css">  <!-- 方式三：外部样式表——把 CSS 写在单独的文件里 -->
+
+</head>
+<body>
+    <!-- 方式一：行内样式——直接写在标签的 style 属性里 -->
+    <p style="color: blue;">这段的蓝色来自行内 style 属性——写法最直接，但毛病不小，练习里见分晓。</p>
+
+    <p class="card">这段的深灰色来自 head 里的 style 块。<a href="index.html">这个链接</a>的颜色和下划线也被我接管了。</p>
+
+</body>
+</html>
