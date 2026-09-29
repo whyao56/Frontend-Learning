@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>display 三兄弟</title>
+        <style>
+            body {
+                font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+                line-height: 1.6;
+                color: #333333;
+            }
+
+            /* 描边看站位：每个元素的占位一眼可见 */
+            div, p, span, a {
+                outline: 1px solid rgba(30, 90, 150, 0.4);
+            }
+
+            .blocky {
+                background-color: #eef4fb;
+            }
+
+            .inliner {
+                width: 300px;  /* inline 元素的 width/height 不生效 */
+                height: 100px;
+                background-color: #fdf3e7;
+            }
+
+            .chip {
+                display: inline-block;  /* 让 span 变成“块状的行内元素” */
+                padding: 6px 14px;
+                color: #1e5a96;
+                background-color: #eef4fb;
+                border: 1px solid #1e5a96;
+                border-radius: 999px;  /* 圆角半径大于高度，变成胶囊形 */
+                text-decoration: none;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>display 三兄弟</h1>
+
+        <h2>一、块级 block：独占一行</h2>
+        <div class="blocky">我是块级元素 div，字很少，但整行都归我。</div>
+        <div class="blocky">我也是块级元素 div，但下一个 div 只能换行站。</div>
+        <div class="blocky" style="display: inline-block;">我是块级元素 div，加了 style="display: inline-block;"，不再独占一整行，缩成内容大小</div>
+        <div class="blocky" style="display: inline-block;">窗口够宽的话, 我会和前面的元素排成一行。</div>
+
+        <h2>二、行内 inline：跟着文字排，宽高不生效</h2>
+        <p>这句话里有一个 <span class="inliner">设了 300×100 的行内元素 span</span>，但它只按文字多少占位，宽高不生效。</p>
+        <p>一个 <span class="inliner" style="display: inline-block;">设了 300×100 的行内元素 span</span>，但加了style="display: inline-block;</p>
+
+        <h2>三、行内块 inline-block：能排队、也能有尺寸</h2>
+        <p style="display: flex; justify-content: center; gap: 12px;">
+            <a class="chip" style="display: inline-block;" href="https://www.bilibili.com/">b站首页</a>
+            <a class="chip" href="#">文章</a>
+            <a class="chip" style="display: none;" href="#">文章</a>  <!-- display: none; 让元素消失且不占位（后面的元素补位）  -->
+            <a class="chip" style="visibility: hidden;" href="#">文章</a>  <!-- visibility: hidden; 让元素消失但占位（后面的元素不补位）  -->
+            <a class="chip" href="#">关于我们</a>
+        </p>
+
+        <h2>四、display 是切换键：出厂设置可以改</h2>
+        <div class="chip">我是 div，但我现在是胶囊</div>
+        <span class="chip">我是 span，但我现在是胶囊</span>
+        
+    </body>
+</html>

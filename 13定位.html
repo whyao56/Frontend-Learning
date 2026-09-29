@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>定位 position</title>
+        <style>
+            body {
+                font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+                line-height: 1.6;
+                color: #333333;
+            }
+
+            /* 撑出滚动条用的填充块 */
+            .filler {
+                height: 400px;
+                margin-bottom: 16px;
+                background-color: #fafafa;
+                border: 1px dashed #dddddd;
+            }
+
+            /* 固定定位：定在窗口 */
+            .back-top {
+                position: fixed;
+                /* position: absolute; */
+                right:24px;
+                bottom: 24px;
+                padding: 10px 14px;
+                background-color: #1e5a96;
+                color: #ffffff;
+                border-radius: 8px;
+                text-decoration: none;
+            }
+
+            /* 相对定位：位置照占，样子挪走 */
+            .nudge {
+                position: relative;
+                top: -6px;
+                left: 12px;
+                background-color: #fdf3e7;
+                outline: 1px solid rgba(30, 90, 150, 0.4);
+            }
+
+            /* 父相：给“绝对位置”的儿子立基础牌 */
+            .card {
+                position: relative;
+                width: 320px;
+                padding: 16px 24px;
+                border: 1px solid #cccccc;
+                border-radius: 10px;
+                background-color: #f8fafc;
+                margin-bottom: 40px;
+            }
+
+            /* 子绝：脱队，贴到最近的“定位祖先”上 */
+            .badge {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                padding: 2px 10px;
+                background-color: orangered;
+                color: #ffffff;
+                border-radius: 999px;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="top">定位 position</h1>
+        <p>页面滚动时，右下角蓝色按钮始终不动——它相对的是浏览器窗口，不是文档。</p>
+
+        <h2>相对定位 relative：位置照占，样子挪走</h2>
+        <p>这段里的 <span class="nudge">我偏了半步，但原位还留着</span>，用 top: -6px、left: 12px 相对自己原位偏移。</p>
+
+        <h2>子绝父相：卡片右上角的“新品”徽章</h2>
+        <div class="card">
+            我是一个卡片。右上角挂了个徽章——徽章是绝对定位，卡片是相对定位。徽章脱队，所以卡片布局里没有它的位置。
+            <span class="badge">新品</span>
+        </div>
+
+        <div class="filler">
+            填充块：用来把页面撑长，方便检验 fixed 的效果。
+        </div>
+        <div class="filler">
+            填充块 2。
+        </div>
+        <div class="filler">
+            填充块 3。
+        </div>
+
+        <a class="back-top" href="#top">回到顶部</a>
+    </body>
+</html>

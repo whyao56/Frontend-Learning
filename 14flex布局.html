@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex 布局</title>
+    <style>
+        body {
+            font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333333;
+        }
+
+        /* 通用小方块 */
+        .item {
+            padding: 10px 14px;
+            background-color: #eef4fb;
+            border: 1px solid #1e5a96;
+            border-radius: 6px;
+        }
+
+        /* 拧开关：display: flex */
+        .row {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* 主轴分布：justify-content */
+        .distribute {
+            display: flex;
+            justify-content: space-between;  /* 两端顶格，中间平分 */
+            /* justify-content: center; */  /* 	整体居中 */
+            /* justify-content: space-around; */  /* 每个项目两侧留等距 */
+            padding: 10px;
+            border: 1px dashed #cccccc
+        }
+
+        /* 交叉轴对齐：align-items */
+        .align {
+            display: flex;
+            /* center 注释掉会导致三个盒子全被拉成和 容器一样高（120px），即“高矮不一”消失 */
+            align-items: center;
+            /* align-items: flex-start; */  /* 靠交叉轴起点（顶部） */
+            /* align-items: flex-end; */  /* 靠交叉轴终点（底部） */
+            gap: 12px;
+            height: 120px;
+            padding: 10px;
+            border: 1px dashed #cccccc;
+        }
+        .tall {
+            /* 撑高，制造“高矮不一” */
+            padding: 30px 16px;
+        }
+
+        /* 万能居中 */
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            border: 1px dashed #cccccc;
+        }
+
+        /* 导航配方 */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background-color: #1e5a96;
+            border-radius: 8px;
+        }
+
+        .nav .logo {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .nav .links {
+            /* 嵌套 flex */
+            display: flex;
+            gap: 16px;
+        }
+
+        .nav .links a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* 等宽卡片配方 */
+        .cards {
+            display: flex;
+            gap: 16px;
+        }
+        .cards .card {
+            /* 剩余空间均分：等宽 */
+            flex: 1;
+            padding: 16px;
+            background-color: #f8fafc;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Flex 布局</h1>
+
+    <h2>拧开关：三个 div 排成一行</h2>
+    <div class="row">
+        <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+    </div>
+
+    <h2>主轴分布：justify-content</h2>
+    <div class="distribute">
+        <div class="item">左</div>
+        <div class="item">中</div>
+        <div class="item">右</div>
+    </div>
+
+    <h2>交叉轴对齐：align-items</h2>
+    <div class="align">
+        <div class="item">矮</div>
+        <div class="item tall">高</div>
+        <div class="item">矮</div>
+    </div>
+
+    <h2>万能居中：两句话</h2>
+    <div class="center">
+        <div class="item">水平垂直都居中</div>
+    </div>
+
+    <h2>导航配方：space-between + 嵌套 flex</h2>
+    <nav class="nav">
+        <span class="logo">花易落</span>
+        <div class="links">
+            <a href="#">首页</a>
+            <a href="#">课程</a>
+            <a href="#">关于</a>
+        </div>
+    </nav>
+
+    <h2>等宽卡片配方：flex: 1</h2>
+    <div class="cards">
+        <div class="card">卡片 一</div>
+        <div class="card">卡片 二</div>
+        <div class="card">卡片 三</div>
+    </div>    
+    <div class="cards">
+        <div style="flex: 2;" class="card">卡片 一</div>
+        <div style="flex: 1;" class="card">卡片 二</div>
+        <div style="flex: 1;" class="card">卡片 三</div>
+    </div>
+</body>
+</html>
+

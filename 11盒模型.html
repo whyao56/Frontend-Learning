@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>盒模型</title>
+        <style>
+            * { outline: 1px solid rgba(255, 0, 0, 0.3); }
+
+            body {
+                font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+                line-height: 1.6;
+                color: #333333;
+            }
+
+            /* 盒子两兄弟：设置一模一样，只差下方 box-border 那一行 */
+            .box {
+                width: 200px;
+                padding: 20px;
+                /* padding: 40px;  上下左右都是 40px */
+                border: 2px solid #1e5a96;
+                background-color: #eef4fb;
+                margin-bottom: 24px;
+                /* box-sizing: border-box;  */
+            }
+
+            .box-border {
+                box-sizing: border-box;  /* 唯一的不同。盒模型的计算方式：border-box */
+            }
+
+            .tight, .roomy {
+                background-color: #f0f0f0;
+                border: 1px solid #cccccc;
+                /* padding: 16px 24px;  上下 16px，左右 24px */
+            }
+            .roomy {
+                padding: 16px 24px;  /* 上下 16px，左右 24px */ 
+            }
+
+            /* 外边框实验组 */
+            .m1 {
+                margin-bottom: 40px;
+                background-color: #fdf3e7;
+            }
+            .m2 {
+                margin-bottom: 20px;
+                background-color: #fdf3e7;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>盒模型</h1>
+
+        <h2>实验一：都写 width: 200px，实际占宽不一样</h2>
+        <div class="box">默认盒（content-box）：内容(width) + 内边距(padding) + 边框(border) = 200 + 20*2 + 2*2 = 视觉总宽 244px</div>
+        <div class="box box-border">对照盒（border-box）：内容(width) + 内边距(padding) + 边框(border) = 200px</div>
+        <p>先看两个盒子的右边缘对不对得齐，再拿 DevTools 的盒模型图核对。</p>
+
+        <h2>实验二：内边距不同，视觉总宽不一样（盒子里的呼吸空间）</h2>
+        <div class="tight">紧凑盒（没有 padding）：padding 0px，视觉总宽 200px，文字紧贴边框。</div>
+        <div class="roomy">宽松盒（有 padding）：padding 16px 24px，视觉总宽 200 + 24*2 = 248px，文字和边框之间有了呼吸感。</div>
+
+        <h2>实验三：外边距不同，视觉总高不一样（盒子之间的间距）</h2>
+        <p class="m1">我的 margin-bottom 是 40px。</p>
+        <p class="m2">我的 margin-bottom 是 20px。猜猜我们之间的空隙是 40、20 还是 60？</p> 
+    </body>
+</html>

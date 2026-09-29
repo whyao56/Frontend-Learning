@@ -5,7 +5,7 @@ h1 {
 }
 
 p {
-    color: red;
+    /* color: red; */
     color: #444444;  /* 十六进制颜色：# 后 6 位 */
     line-height: 1.8;  /* 行高：字号的 1.8 倍，行距变松 */
 }
@@ -23,7 +23,19 @@ body {
 }
 
 .card {
-    border: 3px dashed blueviolet;  /* 边框：3 像素虚线，颜色为绿色 */
+    border: 3px dashed blueviolet;  /* 边框：3 像素虚线，颜色为蓝紫 */
     border-radius: 8px;  /* 圆角：半径为 8 像素 */
     background-color: #f0f0f0;  /* 背景色：浅灰色 */
+}
+
+.cards {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+    }
 }
