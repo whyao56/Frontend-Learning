@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>JS 第三课：函数、数组与对象</title>
+</head>
+<body>
+    <h1>JS 第三课：函数、数组与对象</h1>
+    <p>所有输出在 Console（F12 → Console，先开再刷新）。</p>
+
+    <script>
+        // 1. 函数
+        function greet(name) {
+            return `你好，${name}！`;  // 函数体内的 return 语句返回一个值
+        }
+        console.log(greet("花易落"));  // 调用函数并打印返回值
+        console.log(greet("世界"));
+
+        // 只要函数体内没有 return 语句，函数就会返回 undefined
+        function shout(text) {
+            console.log(text + "!!!");  // 只是打印，没有 return
+        }
+        const result = shout("喂");  // result 的值是 undefined
+        console.log(result);
+
+        // 默认参数：如果调用函数时没有传入参数，默认使用指定的默认值
+        function power(base, exponent = 2) {
+            return base ** exponent;  // base 的 exponent 次方
+        }
+        console.log(power(5));  // 25：5 的平方，默认 exponent = 2
+        console.log(power(2, 10));  // 1024：2 的 10 次方，指定 exponent = 10
+
+        // 箭头函数：简化函数的写法，尤其适合只有一行代码的函数
+        const add = (a, b) => a + b;  // 返回 a + b
+        console.log(add(3, 4));  // 7
+
+
+        // 2. 数组
+        const flowers = ["清晨的花", "夜晚的灯", "代码里的花"];
+        console.log(flowers[0]);  // 清晨的花：下标从 0 开始，访问数组的第一个元素
+        console.log(flowers[-1]);  // undefined：JavaScript 中没有负数下标，访问不存在的元素返回 undefined
+        console.log(flowers.at(-1));  // 代码里的花：使用 at() 方法访问数组的最后一个元素
+        console.log(flowers.length);  // 3：数组的长度，即元素的个数
+        console.log(flowers.push("家人的日出"));  // 在数组末尾添加一个元素，类似 Python 的 append()
+        console.log(flowers);  // ["清晨的花", "夜晚的灯", "代码里的花", "家人的日出"]
+        console.log(flowers.includes("夜晚的灯"));  // true：检查数组是否包含指定元素
+        console.log(flowers.indexOf("夜晚的灯"));  // 1：返回指定元素在数组中的下标，如果不存在则返回 -1
+        const last = flowers.pop();  // 删除数组末尾的元素，并返回该元素（尾部弹出，返回弹出的值）
+        console.log(last);  // 家人的日出：被删除的元素
+        console.log(flowers.join(" | "));  // 清晨的花 | 夜晚的灯 | 代码里的花：将数组元素连接成一个字符串，使用指定的分隔符
+
+        // const 数组：const 声明的数组内容可以修改，但不能重新赋值，整个数组的引用不能改变，会报错
+        flowers.push("新的花");  // 可以修改数组内容
+        // flowers = ["新的花"];  // TypeError: Assignment to constant variable. 这会报错，因为不能重新赋值 const 声明的数组
+
+
+        // 3. 对象
+        const me = {
+            name: "花易落",
+            age: 25,
+            tags: ["前端", "学习中"],
+            hello() {
+                return "你好鸭";
+            }
+        };
+        console.log(me.name);  // 花易落：访问对象的属性
+        console.log(me["age"]);  // 25：另一种访问对象属性的方式
+        console.log(me.city);  // undefined：访问不存在的属性，不报错，返回 undefined
+        me.city = "杭州";  // 给对象添加一个新属性
+        delete me.age;  // 删除对象的属性
+        console.log(me.hello());
+
+
+        // 4. 对象数组：数据的组织方式，常用于存储一组相似的对象
+        const works = [
+            { title: "个人主页", done: true },
+            { title: "Todo List", done: false },
+            { title: "博客", done: false }
+        ];
+        for (const w of works) {
+            console.log(`${works.indexOf(w) + 1}. ${w.title} - ${w.done ? "已完成" : "未完成"}`);  // `条件 ? A : B` 是使用三元运算符判断 done 的值，类似 Python 的 if-else 表达式 `A if 条件 else B`
+        }
+        console.log(works.push({ title: "作品页", done: false }));  
+        console.log(works.length);
+        console.log(works[0].title);
+        console.log(works[2].done);
+        // 这就是将来“作品卡片区”要渲染的内容：每个作品的标题和完成状态
+        
+
+        const isEven = n => n % 2 === 0;  // 判断一个数是否为偶数的箭头函数
+        console.log(isEven(4));  // true
+        console.log(isEven(5));  // false
+
+        const maxOf = (a, b) => (a > b ? a : b);  // 返回两个数中较大的一个
+        console.log(maxOf(3, 7));  // 7
+        console.log(maxOf(-3, -7));  // -3
+
+
+        const FizzBuzz = n => {
+            let result = [];
+            // const result = []; 
+            for (let i = 1; i <= n; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    result.push("FizzBuzz");
+                } else if (i % 3 === 0) {
+                    result.push("Fizz");
+                } else if (i % 5 === 0) {
+                    result.push("Buzz");
+                } else {
+                    result.push(i);
+                }
+            }
+            return result;
+        }
+        console.log(FizzBuzz(20).join(", "));  // 调用函数，输出 1 到 20 的 FizzBuzz，并将结果数组连接成字符串
+
+
+        function average(arr) {
+            if (arr.length === 0) return 0;  // 如果数组为空，返回 0
+
+            let sum = 0;
+            for (const num of arr) {
+                sum += num;  // 累加数组中的每个数字
+            }
+            return sum / arr.length;  // 返回平均值
+        }
+        console.log(average([2, 4, 6])); 
+
+
+        const n = [1, 2, 3]; n.push(4);
+        // n = [9];  // TypeError: Assignment to constant variable.
+        const o = { a: 1 }; o.a = 2;  // 可以修改对象的属性
+        // o = { b: 3 };  // TypeError: Assignment to constant variable.
+    </script>
+</body>
+</html>

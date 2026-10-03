@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS 第二课：运算、比较与流程控制</title>
+    </head>
+<body>
+    <h1>JS 第二课</h1>
+    <p>所有输出在 Console（F12 → Console，刷新页面看结果）。</p>
+
+    <script>
+        // 1. 算术
+        console.log(10 + 3);  // 13
+        console.log(10 / 4);  // 2.5：没有整除概念
+        console.log(7 % 3);  // 1：取余数
+        console.log(-7 % 3);  // -1：取余数，向零截断，符号与被除数相同，和 Python 的向下取整不同
+        console.log(2 ** 10);  // 1024：幂运算，2 的 10 次方
+
+        // 2. 字符串的 + 号
+        console.log("花" + "易" + "落");  // “花易落”：拼接
+        console.log("5" + 3);  // "53"：字符串 + 数字，数字会被转换为字符串
+        console.log("5" - 3);  // 2：字符串 - 数字，字符串会被转换为数字
+
+        // 3. 比较运算符：== 与 ===
+        console.log(1 === 1);  // true：值、类型都相等
+        console.log("1" === 1);  // false：字符串 vs 数字，类型不同
+        console.log("1" == 1);  // true：== 会进行类型转换，所以字符串 "1" 会被转换为数字 1 （危险源）
+        console.log(null == undefined);  // true：== 会进行类型转换，null 和 undefined 被认为是相等的
+        console.log(null === undefined);  // false：=== 不会进行类型转换，null 和 undefined 类型不同
+        console.log(NaN === NaN);  // false：NaN 不等于任何值，包括它自己
+        console.log(0 === -0);  // true：0 和 -0 在 JavaScript 中被认为是相等的
+        console.log(0 == -0);  // true：0 和 -0 在 JavaScript 中被认为是相等的
+        Object.is(0, -0);  // false：Object.is() 方法可以区分 0 和 -0
+        
+        // 4. 逻辑运算符：&&、||、!
+        const age = 25;
+        console.log(age >= 18 && age <= 60);  // true：逻辑与，两个条件都为真才为真
+        console.log(age < 18 || age > 60);  // false：逻辑或，两个条件都为假才为假
+        console.log(!(age < 18));  // true：逻辑非，取反
+
+        // 5. 真值表：JavaScript 中的真值和假值
+        // 只有这几位算是假的：false、0、-0、""（空字符串）、null、undefined、NaN
+        // 其余的都是“真”，包括空对象 {}、空数组 []、空函数 function(){} 等等
+        if ("") {
+            console.log("空字符串：真");
+        } else {
+            console.log("空字符串：假");
+        }
+        if ([]) {
+            console.log("空数组：真（Python 里空数组是假的）");
+        }
+       
+        // 6. if、else if、else
+        const score = 85;
+        if (score >= 90) {
+            console.log("优秀");
+        } else if (score >= 80) {
+            console.log("良好");
+        } else if (score >= 70) {
+            console.log("中等");
+        } else if (score >= 60) {
+            console.log("及格");
+        } else {
+            console.log("不及格");
+        }
+
+        // 7. while 循环
+        let count = 3;
+        while (count > 0) {
+            console.log(`倒计时：${count}`);
+            count--;  // count = count - 1 
+        }
+        console.log("发射！");
+
+        // 8. for 循环
+        let sum = 0;
+        for (let i = 1; i <= 5; i++) {
+            sum += i;  // sum = sum + i
+        }
+        console.log(`1到5的和是：${sum}`);  // 15
+
+        // for...of 循环：遍历数组
+        for (const fruit of ["花", "灯", "代码"]) {
+            console.log(`我喜欢 ${fruit}`);
+        }
+
+        // break 与 continue
+        for (let i = 1; i <= 10; i++) {
+            if (i % 2 === 0) continue;  // 偶数跳过
+            if (i > 7) break;  // 大于 7 停止循环
+            console.log(`奇数：${i}`);  // 1, 3, 5, 7
+        }
+
+
+        let total = 0;
+        for (let i = 1; i <= 100; i++) {
+            if (i % 3 === 0) {
+                total += i;
+            }
+        }
+        console.log(`1到100中所有能被3整除的数的和是：${total}`);  // 1683
+
+
+        function FizzBuzz(n) {
+            for (let i = 1; i <= n; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log("FizzBuzz");
+                } else if (i % 3 === 0) {
+                    console.log("Fizz");
+                } else if (i % 5 === 0) {
+                    console.log("Buzz");
+                } else {
+                    console.log(i);
+                }
+            }
+        }
+        const result = FizzBuzz(20);  // 调用函数，输出 1 到 20 的 FizzBuzz
+        console.log(result);  
+
+
+    </script>
+</body>
+</html>
+

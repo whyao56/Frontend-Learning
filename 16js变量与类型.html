@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS 第一课：变量与类型</title>
+    </head>
+    <body>
+    <h1>JS 第一课：变量与类型</h1>
+    <p>本页没有可见输出——所有结果都打印在 Console 里。按 F12，切到 Console 看。</p>
+
+    <script>
+        // 单行注释（Ctrl + /）
+        /* 多行注释（Shift + Alt + A） */
+
+        console.log("你好，JavaScript! ")  // Python 的 print
+
+        // 变量：必须先用关键字声明
+        let age = 25;  // 之后可以重新赋值
+        const name = "花易落";  // 之后不再重新赋值
+
+        // 模板字符串：反引号 + ${} --> 近似 Python 的 f-string
+        console.log(`你好，${name}! 你今年 ${age} 岁。`)
+
+        // typeof：查看类型，近似 Python 的 type()
+        console.log(typeof name)
+        console.log(typeof age)
+        console.log(typeof true)
+
+        // let a = 1; 
+        // let a = 2;
+
+    </script>
+</body>
+</html>
+
