@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>20 事件</title>
+        <style>
+            body {
+                font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+                line-height: 1.6;
+                color: #333333;
+                padding: 16px;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            #counter {
+                font-size: 20px;
+                font-weight: bold;
+                color: #c0392b;
+            }
+            .item {
+                display: inline-block;
+                padding: 8px 16px;
+                margin: 4px;
+                border: 1px solid #1e5a96;
+                border-radius: 999px;
+                cursor: pointer;
+                user-select: none;
+            }
+            .active {
+                background-color: #1e5a96;
+                color: #ffffff;
+            }
+            #preview {
+                color: #2980b9;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>事件：页面开始回应你</h1>
+
+        <h2>一、点击计数</h2>
+        <button id="btn">点我 +1</button>
+        <p>已点击：<span id="counter">0</span> 次</p>
+
+        <button id="reset">重置</button>
+        
+        <h2>二、点谁选谁</h2>
+        <div id="chips">
+            <span class="item">清晨的花</span>
+            <span class="item">夜里的灯</span>
+            <span class="item">写了一半的代码</span>
+        </div>
+
+        <h2>三、边输入边预览</h2>
+        <input id="name-input" type="text" placeholder="请输入你的名字">
+        <p>你好，<span id="preview">（还未输入）</span>！</p>
+
+        <p>已输入：<span id="input-count">0</span> 个字符</p>
+
+
+        <script>
+            // 装门铃：事件类型
+            let count = 0;
+            const btn = document.querySelector("#btn");
+            const counter = document.querySelector("#counter");
+
+            // btn.addEventListener("click", function() {
+            //     count++;
+            //     counter.textContent = count;
+            // });
+
+            function addOne() {
+                count++;
+                counter.textContent = count;
+            }
+            btn.addEventListener("click", addOne);   // 传函数名，不带括号
+
+            const reset = document.querySelector("#reset");
+            reset.addEventListener("click", function() {
+                count = 0;
+                counter.textContent = count;  
+            });
+
+            // 一排元素，每个元素都可以被点击，点击后会高亮显示；用 event.target 来获取被点击的元素
+            const items = document.querySelectorAll(".item");
+            for (const item of items) {
+                item.addEventListener("click", function(event) {
+                    console.log("被点的是：" + event.target.textContent);
+                    // 给被点击的元素添加高亮
+                    event.target.classList.toggle("active");
+                });
+            }
+
+            // input 输入框的事件：input 事件会在每次输入时触发
+            const input = document.querySelector("#name-input");
+            const preview = document.querySelector("#preview");
+
+            input.addEventListener("input", function() {
+                preview.textContent = input.value || "（还未输入）";
+                document.querySelector("#input-count").textContent = input.value.length;  // 直接获取输入框的长度
+                console.log("input 事件触发，当前输入值：", input.value);
+            });
+
+            input.addEventListener("change", function() {
+                console.log("change 事件触发，当前输入值：", input.value);
+            });
+
+
+        </script>
+    </body>
+</html>
