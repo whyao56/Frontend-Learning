@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22 作品卡片区预演</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 24px 16px;
+            font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        /* 网格容器：三列，自动流排 */
+        .grid {
+            display: grid;
+            /* grid-template-columns: repeat(3, 1fr); */
+            /* grid-template-columns: repeat(2, 1fr); */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        
+
+        .card {
+            padding: 16px 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .card h3 {
+            margin: 0 0 8px;
+        }
+
+        /* 状态徽章：又是“JS 加类，CSS 管样” */
+        .status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+        }
+
+        .done {
+            background-color: #e6f4ea;
+            color: #2e7d32;
+        }
+        .todo {
+            background-color: #fdf3e7;
+            color: #b35c00;
+        }
+
+        /* 窄屏：三列太紧，收成一列（15课“老手艺”） */
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>作品卡片区预演</h1>
+    <p>下面的卡片没有一行是手写的 HTML —— 全部由 JS 数据数组里“长”出来的。</p>
+
+    <div class="grid" id="works-grid"></div>
+
+    <h2>同一份数据的快捷渲染</h2>
+    <ul id="title-list"></ul>
+
+    <script>
+        // 1. 数据：对象数组（18 课的老朋友）
+        const works = [
+            { title: "个人主页", desc: "用 HTML/CSS 搭出的个人门面，带响应式布局。", done: true},
+            { title: "待办清单", desc: "练 DOM 与事件：新增、勾选、删除一条龙。", done: false },
+            { title: "配色实验场", desc: "点按钮换配色，复习变量与事件。", done: false },
+            { title: "天气小卡片", desc: "调 API 拿天气数据，练 fetch 与 JSON。", done: true }
+        ];
+
+        // 2. 路线一：createElement（存档）
+        // const grid = document.querySelector("#works-grid");
+
+        // for (const w of works) {
+        //     // 第一步：造零件（此时只在内存里，页面没动静）
+        //     const card = document.createElement("div");
+        //     card.classList.add("card");
+
+        //     const h3 = document.createElement("h3");
+        //     h3.textContent = w.title;
+
+        //     const p = document.createElement("p");
+        //     p.textContent = w.desc;
+
+        //     const status = document.createElement("span");
+        //     status.textContent = w.done ? "已完成" : "进行中";
+        //     status.classList.add("status");
+        //     status.classList.add(w.done ? "done" : "todo");
+
+        //     // 第二步：组装（把零件挂进卡片）
+        //     card.appendChild(h3);
+        //     card.appendChild(p);
+        //     card.appendChild(status);
+
+        //     // 第三步：上树（挂进网格 —— 这一刻页面才出现它）
+        //     grid.appendChild(card);
+        // }
+
+        // 2. 路线二：map + innerHTML（现役）
+        const grid = document.querySelector("#works-grid");
+
+        grid.innerHTML = works.map(w => `
+        <div class="card">
+            <h3>${w.title}</h3>
+            <p>${w.desc}</p>
+            <span class="status ${w.done ? "done" : "todo"}">${w.done ? "已完成" : "进行中"}</span>
+        </div>
+        `).join("");
+
+
+        // 3. 快捷路线：map + join + innerHTML（同一份数据）
+        document.querySelector("#title-list").innerHTML = 
+            works.map(w => `<li>${w.title} (${w.done ? "已完成" : "进行中"})</li>`).join("");
+    </script>
+
+</body>
+</html>

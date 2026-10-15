@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 滚动与表单校验</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 顶部导航：默认浅色，滚动后换装 */
+        .topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .topbar.scrolled {
+            background-color: #1e5a96;
+            color: #fff;
+        }
+        .topbar.scrolled a {
+            color: #fff;
+        }
+        .topbar nav {
+            display: flex;
+            gap: 16px;
+        }
+        .topbar a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 16px 40px;
+        }
+
+        .filler{
+            height: 300px;
+            margin-bottom: 16px;
+            border: 1px dashed #ddd;
+            background-color: #fafafa;
+        }
+
+        /* 表单 */
+        form {
+            max-width: 420px;
+            padding: 16px 24px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f8fafc;
+        }
+
+        label {
+            display: inline-block;
+            width: 64px;
+        }
+
+        input {
+            padding: 6px 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;  /* 去掉聚焦时的蓝色轮廓（可选） */
+        }
+
+        .invalid {
+            border-color: #c0392b;
+        }
+
+        .error {
+            margin: 4px 0 4px 68px;
+            color: #c0392b;
+            font-size: 14px;
+        }
+
+        .ok {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="topbar" id="topbar">
+        <span>花易落</span>
+        <nav>
+            <a href="#">首页</a>
+            <a href="#">课程</a>
+            <a href="#">关于</a>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>滚动、提交与表单校验</h1>
+        <p>慢慢往下滚：越过 80px 后，顶部导航换装（变蓝）。</p>
+
+        <div class="filler">
+            填充块 1 （滚下去）
+        </div>
+        <div class="filler">
+            填充块 2 （再滚）
+        </div>
+
+        <h2>留言表单</h2>
+        <form id="signup" novalidate>
+            <p>
+                <label for="username">昵称：</label>
+                <input type="text" id="username" name="username" placeholder="必填">
+            </p>
+            <p class="error hidden" id="username-error1">昵称不能为空</p>
+            <p class="error hidden" id="username-error2">昵称至少 8 个字符</p>
+
+            <p>
+                <label for="email">邮箱：</label>
+                <input type="email" id="email" name="email" placeholder="要包含 @">
+            </p>
+            <p class="error hidden" id="email-error1">邮箱不能为空</p>
+            <p class="error hidden" id="email-error2">邮箱格式不正确</p>
+
+            <p>
+                <button type="submit">提交</button>
+            </p>
+            <p class="ok hidden" id="success">
+                提交成功！（演示，无实际提交功能，数据不持久化）
+            </p>
+        </form>
+
+        <div class="filler">
+            填充块 3（继续滚）
+        </div>
+    </div>
+
+
+    <script>
+        // 1. 滚动换装
+        const topbar = document.querySelector("#topbar");
+
+        function updateTopbar() {
+            if (window.scrollY > 80) {
+                topbar.classList.add("scrolled");  //
+            } else {
+                topbar.classList.remove("scrolled");  //
+            }
+        }
+        window.addEventListener("scroll", updateTopbar);
+        updateTopbar();  //
+
+
+        // 2. 表单提交：先拦下，再自己处理
+        const form = document.querySelector("#signup");
+        const username = document.querySelector("#username");
+        const email = document.querySelector("#email");
+        const usernameError1 = document.querySelector("#username-error1");
+        const usernameError2 = document.querySelector("#username-error2");
+        const emailError1 = document.querySelector("#email-error1");
+        const emailError2 = document.querySelector("#email-error2");
+        const success = document.querySelector("#success");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();  // 拦住默认提交：不跳转、不刷新
+            
+            let ok = true;  //汇总开关：所有检查都过，才放行
+
+            // if (username.value.trim() === "") {  
+            //     usernameError1.classList.remove("hidden");
+            //     ok = false;
+            // } else {
+            //     usernameError1.classList.add("hidden");
+            //     // ok = true;  // 默认为 true，加的话可能会产生覆盖 bug
+            // }
+
+            // if (username.value.trim().length < 8) {
+            //     usernameError2.classList.remove("hidden");
+            //     ok = false;
+            // } else {
+            //     usernameError2.classList.add("hidden");
+            // }
+
+            const name = username.value.trim();
+
+            if (name === "") {  //trim() 约等于 Python 的 strip()
+                usernameError1.classList.remove("hidden");
+                usernameError2.classList.add("hidden");
+                username.classList.add("invalid");
+                ok = false;
+            } else if (name.length < 8) {
+                usernameError1.classList.add("hidden");
+                usernameError2.classList.remove("hidden");
+                username.classList.add("invalid");
+                ok = false;
+            } else {
+                usernameError1.classList.add("hidden");
+                usernameError2.classList.add("hidden");
+                username.classList.remove("invalid");
+            }
+
+
+            // if (!email.value.includes("@")) {  // 最小邮箱检查，真实项目用正则
+            //     emailError1.classList.remove("hidden");
+            //     ok = false;
+            // } else {
+            //     emailError.classList.add("hidden");
+            //     // ok = true; 
+            // }
+
+            const emailVal = email.value.trim();
+
+            if (emailVal === "") {
+                emailError1.classList.remove("hidden");
+                emailError2.classList.add("hidden");
+                email.classList.add("invalid");
+                ok = false;
+            } else if (!emailVal.includes("@")) {
+                emailError1.classList.add("hidden");
+                emailError2.classList.remove("hidden");
+                email.classList.add("invalid");
+                ok = false;
+            } else {
+                emailError1.classList.add("hidden");
+                emailError2.classList.add("hidden");
+                email.classList.remove("invalid");
+            }
+
+
+            if (ok) {
+                success.classList.remove("hidden");
+                // 预演“要发给服务器的数据”——将来 fetch 送出去的就是它
+                console.log("要发送的数据：", { 
+                    username: name,  // 复用 trim 后的 name
+                    email: emailVal  // 复用 trim 后的 emailVal
+                });
+            } else {
+                success.classList.add("hidden");
+            }
+        });
+
+
+
+        // 3. 实时校验：边输入边消错
+        username.addEventListener("input", function() {
+            const name = username.value.trim();
+
+            if (name === "") {
+                usernameError1.classList.remove("hidden");
+                usernameError2.classList.add("hidden");
+            } else if (name.length < 8) {
+                usernameError1.classList.add("hidden");
+                usernameError2.classList.remove("hidden");
+            } else {
+                usernameError1.classList.add("hidden");
+                usernameError2.classList.add("hidden");
+                username.classList.remove("invalid");
+            }
+        });
+
+        email.addEventListener("input", function() {
+            const emailVal = email.value.trim();
+
+            if (emailVal === "") {
+                emailError1.classList.remove("hidden");
+                emailError2.classList.add("hidden");
+            } else if (!emailVal.includes("@")) {
+                emailError1.classList.add("hidden");
+                emailError2.classList.remove("hidden");
+            } else {
+                emailError1.classList.add("hidden");
+                emailError2.classList.add("hidden");
+                email.classList.remove("invalid");
+            }
+        });
+    </script>
+</body>
+</html>
