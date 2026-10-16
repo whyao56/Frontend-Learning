@@ -1,0 +1,130 @@
+:root {
+    --primary: #2e7d32;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* 基础 */
+body {
+    margin: 0;
+    font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+}
+
+/* 导航 */
+.topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: background-color 0.2s, color 0.2s;
+}
+.topbar.scrolled {
+    background-color: var(--primary);
+    color: #fff;
+}
+.topbar.scrolled a {
+    color: #fff;
+}
+.topbar nav {
+    display: flex;
+    gap: 16px;
+}
+.topbar a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* 内容不被导航遮住 + 临时高度 */
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 16px 40px;  /* 上 80px 给固定导航让位 */
+    min-height: 150vh;  /* 临时：M1 要能滚，M2 删 */
+}
+
+section {
+    scroll-margin-top: 80px;
+}
+
+/* 卡片区：网格 */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+/* 卡片 */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;  /* 图片超出部分裁掉，圆角不溢出 */
+    padding-bottom: 12px;
+}
+.card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+.card h3 {
+    margin: 12px 16px 4px;
+}
+.card p {
+    margin: 0 16px 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* 徽章 */
+.status {
+    display: inline-block;
+    margin: 0 16px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+.done {
+    background-color: #e6f4ea;
+    color: #2e7d32;
+}
+
+.todo {
+    background-color: #fdf3e7;
+    color: #b35c00;
+}
+
+/* 简介区：flex 排 */
+.about-content {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;  /* 正圆 */
+    object-fit: cover;  /* 裁剪填充，不变形 */
+    flex-shrink: 0;  /* 不允许被压缩 */
+}
+
+.about-text {
+    flex: 1;  /* flex-grow = 1 的简写：文字占满剩余空间 */
+}
+.about-text p {
+    margin: 0 0 8px;
+}
