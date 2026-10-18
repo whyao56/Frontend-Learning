@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="topbar" id="topbar">
-        <span>Whyao</span>
+        <a href="#top">Whyao</a>
         <nav>
             <a href="#top">首页</a>
             <a href="#works">作品</a>
@@ -26,11 +26,24 @@
             <div class="about-content">
                 <img class="avatar" src="images/bee.png" alt="头像">
                 <div class="about-text">
-                    <p>Whyao · 个人项目：从 Python 到 前端</p>
+                    <p>Whyao · 个人项目：“从 Python 后端起步，现在正全力补全前端地基。这个站点收录了我独立开发的项目：从网络舆情引擎、聊天助手到语言学习工具。”</p>
                 </div>
             </div>
         </section>
     </main>
+
+
+    <!-- 模态框 -->
+     <div class="modal" id="my-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">×</button>
+            <img class="modal-img" id="modal-img" src="" alt="">
+            <h2 id="modal-title"></h2>
+            <p id="modal-detail"></p>
+            <a id="modal-link" href="" target="_blank" rel="noopener">访问作品 →</a>
+        </div>
+     </div>
+
 
     <footer>
         <p>&copy; 2026 · Whyao</p>

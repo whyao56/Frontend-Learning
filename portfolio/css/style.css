@@ -14,6 +14,9 @@ body {
     color: #333;
     background-color: #fafafa;
 }
+body.modal-open { 
+    overflow: hidden; 
+}
 
 /* 导航 */
 .topbar {
@@ -46,10 +49,9 @@ body {
 
 /* 内容不被导航遮住 + 临时高度 */
 main {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
     padding: 80px 16px 40px;  /* 上 80px 给固定导航让位 */
-    min-height: 150vh;  /* 临时：M1 要能滚，M2 删 */
 }
 
 section {
@@ -59,8 +61,8 @@ section {
 /* 卡片区：网格 */
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));  /* 固定 3 列 → auto-fit */
+    gap: 24px;
     margin-top: 16px;
 }
 
@@ -71,6 +73,15 @@ section {
     border-radius: 10px;
     overflow: hidden;  /* 图片超出部分裁掉，圆角不溢出 */
     padding-bottom: 12px;
+    cursor: pointer;   
+    transition: transform 0.2s, box-shadow 0.2s; /* 加个高级悬浮效果 */
+    display: flex; 
+    flex-direction: column;
+}
+/* 顺手加个卡片悬浮效果，体验立马不一样 */
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 .card-img {
     width: 100%;
@@ -94,6 +105,8 @@ section {
     padding: 2px 10px;
     border-radius: 999px;
     font-size: 13px;
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .done {
@@ -127,4 +140,95 @@ section {
 }
 .about-text p {
     margin: 0 0 8px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 100;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal.open {
+    display: flex;
+}
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    max-width: 560px;
+    width: calc(100% - 32px);
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+.modal-close {
+    position: absolute;
+    top: 6px; 
+    right: 8px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    color: #999;
+    transition: color 0.2s;
+}
+.modal-close:hover{
+    color: #333;
+}
+.modal-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+.modal-content a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 8px;
+}
+.modal-content a:hover {
+    text-decoration: underline;
+}
+
+#modal-title {
+    margin: 0 0 12px;
+    font-size: 24px;
+    color: #222;
+}
+
+#modal-detail {
+    margin: 0 0 24px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 700px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+a:focus-visible, button:focus-visible {
+    outline: none; /* 删掉硬边框 */
+    /* 给一圈淡淡的绿色发光 */
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.2); 
+    border-radius: 4px;
+}
+
+/* 对于 × 按钮，加上圆形发光 */
+.modal-close:focus-visible {
+    border-radius: 50%;
 }

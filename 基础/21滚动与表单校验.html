@@ -258,9 +258,11 @@
             if (name === "") {
                 usernameError1.classList.remove("hidden");
                 usernameError2.classList.add("hidden");
+                username.classList.add("invalid");
             } else if (name.length < 8) {
                 usernameError1.classList.add("hidden");
                 usernameError2.classList.remove("hidden");
+                username.classList.add("invalid");
             } else {
                 usernameError1.classList.add("hidden");
                 usernameError2.classList.add("hidden");
@@ -274,9 +276,11 @@
             if (emailVal === "") {
                 emailError1.classList.remove("hidden");
                 emailError2.classList.add("hidden");
+                email.classList.add("invalid");
             } else if (!emailVal.includes("@")) {
                 emailError1.classList.add("hidden");
                 emailError2.classList.remove("hidden");
+                email.classList.add("invalid");
             } else {
                 emailError1.classList.add("hidden");
                 emailError2.classList.add("hidden");
