@@ -47,7 +47,7 @@ body.modal-open {
     transition: color 0.2s;
 }
 
-/* 内容不被导航遮住 + 临时高度 */
+/* 内容不被导航遮住 */
 main {
     max-width: 1080px;
     margin: 0 auto;
@@ -158,6 +158,7 @@ section {
     background-color: #fff;
     border-radius: 10px;
     padding: 24px;
+    box-sizing: border-box;   /* 让 padding 算进 width，375 宽时两侧才留得出 16px */
     max-width: 560px;
     width: calc(100% - 32px);
     max-height: 80vh;
@@ -231,4 +232,20 @@ a:focus-visible, button:focus-visible {
 /* 对于 × 按钮，加上圆形发光 */
 .modal-close:focus-visible {
     border-radius: 50%;
+}
+
+/* 页脚 */
+footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 8px 16px 32px;
+    font-size: 14px;
+    color: #888;
+}
+footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
 }
